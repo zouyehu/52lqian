@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winnerlook.kuailq.pojo.Phones">
+	
+	<!-- 列结果resultMap Hu 2016-10-02 -->
+	<resultMap id="resultMap" type="com.winnerlook.kuailq.pojo.Phones">
+        <result column="id" property="id"/>
+        <result column="phone" property="phone"/>
+        <result column="num" property="num"/>
+        <result column="create_date" property="create_date"/>
+        <result column="is_del" property="is_del"/>
+        <result column="update_date" property="update_date"/>
+	</resultMap>
+
+	<!-- 公共列 Hu 2016-10-02 -->
+	<sql id="columns">
+		id, phone, num, create_date, is_del,update_date
+	</sql>
+
+	<!-- 公共条件 Hu 2016-10-02 -->
+	<sql id="whereSQL">
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		<if test="phone != null and phone != '' ">
+		AND phone = #{phone}
+		</if>
+		<if test="num != null and num != '' ">
+		AND num = #{num}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		AND create_date = #{create_date}
+		</if>
+		<if test="is_del != null ">
+		AND is_del = #{is_del}
+		</if>
+		<if test="update_date != null and update_date != '' ">
+		AND update_date = #{update_date}
+		</if>
+	</sql>
+
+	<!-- 公共分页条件SQL Hu 2016-10-02 -->
+	<sql id="wherePageSql">
+		<if test="paramMap.id != null and paramMap.id != '' ">
+		AND id = #{paramMap.id}
+		</if>
+		<if test="paramMap.phone != null and paramMap.phone != '' ">
+		AND phone = #{paramMap.phone}
+		</if>
+		<if test="paramMap.num != null and paramMap.num != '' ">
+		AND num = #{paramMap.num}
+		</if>
+		<if test="paramMap.create_date != null and paramMap.create_date != '' ">
+		AND create_date = #{paramMap.create_date}
+		</if>
+		<if test="paramMap.is_del != null ">
+		AND is_del = #{paramMap.is_del}
+		</if>
+		<if test="paramMap.update_date != null and paramMap.update_date != '' ">
+		AND update_date = #{paramMap.update_date}
+		</if>
+	</sql>
+
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectById" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PHONES 
+	     WHERE id = #{id}     
+	</select>
+	
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectByPhone" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PHONES 
+	     WHERE phone = #{phone}     
+	</select>
+
+	<!-- 查询列表 Hu 2016-10-02 -->
+	<select id="selectList" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PHONES
+		 WHERE 1 = 1	
+		 <include refid="whereSQL" />
+	</select>
+
+	<!-- 查询分页总数 Hu 2016-10-02 -->
+	<select id="selectForPageCount" resultType="java.lang.Long">
+		SELECT COUNT(id)
+		  FROM PHONES
+		 WHERE 1 = 1	
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 查询分页列表 Hu 2016-10-02 -->
+	<select id="selectForPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PHONES
+		 WHERE 1 = 1
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 插入 Hu 2016-10-02 -->
+	<insert id="insert" parameterType="com.winnerlook.kuailq.pojo.Phones">
+        INSERT INTO PHONES (
+        	id,
+        	phone,
+        	num,
+        	create_date,
+        	is_del,
+        	update_date
+        ) VALUES (
+        	#{id},
+        	#{phone},
+        	#{num},
+        	#{create_date},
+        	#{is_del},
+        	#{update_date}
+        )
+	</insert>
+
+	<!-- 批量插入 Hu 2016-10-02 -->
+	<insert id="batchInsert">
+		INSERT INTO PHONES (
+        	id,
+        	phone,
+        	num,
+        	create_date,
+        	is_del,
+        	update_date
+        ) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+        	#{item.id},
+        	#{item.phone},
+        	#{item.num},
+        	#{item.create_date},
+        	#{item.is_del},
+        	#{item.update_date}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 更新 Hu 2016-10-02 -->
+	<update id="update" parameterType="com.winnerlook.kuailq.pojo.Phones">
+        UPDATE PHONES 
+		SET
+	        phone = #{phone},
+	        num = #{num},
+	        create_date = #{create_date},
+	        is_del = #{is_del},
+	        update_date = #{update_date}
+        WHERE id = #{id} 	        
+	</update>
+
+	<!-- 删除 Hu 2016-10-02 -->
+	<delete id="delete">
+		DELETE FROM PHONES
+		 WHERE 1 = 1
+		<if test="id != null and id != '' ">
+		   AND id = #{id}
+		</if>
+		<if test="phone != null and phone != '' ">
+		   AND phone = #{phone}
+		</if>
+		<if test="num != null and num != '' ">
+		   AND num = #{num}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		   AND create_date = #{create_date}
+		</if>
+		<if test="is_del != null ">
+		   AND is_del = #{is_del}
+		</if>
+		<if test="update_date != null and update_date != '' ">
+		   AND update_date = #{update_date}
+		</if>
+	</delete>
+
+	<!-- 根据主键ID删除 Hu 2016-10-02 -->
+	<delete id="deleteById">
+		DELETE FROM PHONES 
+		 WHERE id = #{id} 
+	</delete>
+
+</mapper>

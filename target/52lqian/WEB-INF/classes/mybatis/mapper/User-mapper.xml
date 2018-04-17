@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winnerlook.kuailq.pojo.User">
+	
+	<!-- 列结果resultMap Hu 2016-10-02 -->
+	<resultMap id="resultMap" type="com.winnerlook.kuailq.pojo.User">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="create_Date" property="create_date"/>
+        <result column="reserve" property="reserve"/>
+        <result column="reserve1" property="reserve1"/>
+        <result column="user_del" property="user_del"/>
+        <result column="is_del" property="is_del"/>
+        <result column="link_push" property="link_push"/>
+        <result column="link_push_two" property="link_push_two"/>
+	</resultMap>
+
+	<!-- 公共列 Hu 2016-10-02 -->
+	<sql id="columns">
+		id, name, phone, reserve, create_Date, is_del, user_del,reserve1,link_push,link_push_two
+	</sql>
+
+	<!-- 公共条件 Hu 2016-10-02 -->
+	<sql id="whereSQL">
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		<if test="name != null and name != '' ">
+		AND name = #{name}
+		</if>
+		<if test="phone != null and phone != '' ">
+		AND phone = #{phone}
+		</if>
+		<if test="reserve != null and reserve != '' ">
+		AND reserve = #{reserve}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		AND create_Date = #{create_date}
+		</if>
+		<if test="is_del != null ">
+		AND is_del = #{is_del}
+		</if>
+		<if test="user_del != null ">
+		AND user_del = #{user_del}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		AND reserve1 = #{reserve1}
+		</if>
+		<if test="link_push != null and link_push != '' ">
+		AND link_push = #{link_push}
+		</if>
+		<if test="link_push_two != null and link_push_two != '' ">
+		AND link_push_two = #{link_push_two}
+		</if>
+	</sql>
+
+	<!-- 公共分页条件SQL Hu 2016-10-02 -->
+	<sql id="wherePageSql">
+		<if test="paramMap.id != null and paramMap.id != '' ">
+		AND id = #{paramMap.id}
+		</if>
+		<if test="paramMap.name != null and paramMap.name != '' ">
+		AND name = #{paramMap.name}
+		</if>
+		<if test="paramMap.phone != null and paramMap.phone != '' ">
+		AND phone = #{paramMap.phone}
+		</if>
+		<if test="paramMap.reserve != null and paramMap.reserve!= '' ">
+		AND province = #{paramMap.reserve}
+		</if>
+		<if test="paramMap.create_date != null and paramMap.create_date != '' ">
+		AND create_Date = #{paramMap.create_date}
+		</if>
+		<if test="paramMap.is_del != null ">
+		AND is_del = #{paramMap.is_del}
+		</if>
+		<if test="paramMap.user_del != null ">
+		AND user_del = #{paramMap.user_del}
+		</if>
+		<if test="paramMap.reserve1 != null and paramMap.reserve1 != '' ">
+		AND city = #{paramMap.reserve1}
+		</if>
+		<if test="paramMap.link_push != null and paramMap.link_push != '' ">
+		AND link_push = #{paramMap.link_push}
+		</if>
+		<if test="paramMap.link_push_two != null and paramMap.link_push_two != '' ">
+		AND link_push_two = #{paramMap.link_push_two}
+		</if>
+	</sql>
+
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectById" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM USER 
+	     WHERE id = #{id}     
+	</select>
+	
+	<!-- 根据phone查询 Hu 2017-04-11 -->
+	<select id="selectByPhone" resultType="java.lang.String">
+		SELECT ID
+		  FROM USER 
+	     WHERE phone = #{phone}     
+	</select>
+
+	<!-- 查询列表 Hu 2016-10-02 -->
+	<select id="selectList" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM USER
+		 WHERE 1 = 1	
+		 <include refid="whereSQL" />
+	</select>
+
+	<!-- 查询分页总数 Hu 2016-10-02 -->
+	<select id="selectForPageCount" resultType="java.lang.Long">
+		SELECT COUNT(id)
+		  FROM USER
+		 WHERE 1 = 1	
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 查询分页列表 Hu 2016-10-02 -->
+	<select id="selectForPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM USER
+		 WHERE 1 = 1
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 插入 Hu 2016-10-02 -->
+	<insert id="insert" parameterType="com.winnerlook.kuailq.pojo.User">
+        INSERT INTO USER (
+        	id,
+        	name,
+        	phone,
+        	reserve,
+        	create_Date,
+        	is_del,
+        	user_del,
+        	reserve1,
+        	link_push,
+        	link_push_two
+        ) VALUES (
+        	#{id},
+        	#{name},
+        	#{phone},
+        	#{reserve},
+        	#{create_date},
+        	#{is_del},
+        	#{user_del},
+        	#{reserve1},
+        	#{link_push},
+        	#{link_push_two}
+        )
+	</insert>
+
+	<!-- 批量插入 Hu 2016-10-02 -->
+	<insert id="batchInsert">
+		INSERT INTO USER (
+        	id,
+        	name,
+        	phone,
+        	reserve,
+        	create_Date,
+        	is_del,
+        	user_del,
+        	reserve1,
+        	link_push,
+        	link_push_two
+        ) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+        	#{item.id},
+        	#{item.name},
+        	#{item.phone},
+        	#{item.reserve},
+        	#{item.create_date},
+        	#{item.is_del},
+        	#{item.user_del},
+        	#{item.reserve1},
+        	#{item.link_push},
+        	#{item.link_push_two}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 更新 Hu 2016-10-02 -->
+	<update id="update" parameterType="com.winnerlook.kuailq.pojo.User">
+        UPDATE USER 
+		SET
+	        name = #{name},
+	        phone = #{phone},
+	        reserve = #{reserve},
+	        create_Date = #{create_date},
+	        is_del = #{is_del},
+	        user_del = #{user_del},
+	        reserve1 = #{reserve1},
+	        link_push = #{link_push},
+	        link_push_two = #{link_push_two}
+        WHERE id = #{id} 	        
+	</update>
+
+	<!-- 删除 Hu 2016-10-02 -->
+	<delete id="delete">
+		DELETE FROM USER
+		 WHERE 1 = 1
+		<if test="id != null and id != '' ">
+		   AND id = #{id}
+		</if>
+		<if test="name != null and name != '' ">
+		   AND name = #{name}
+		</if>
+		<if test="phone != null and phone != '' ">
+		   AND phone = #{phone}
+		</if>
+		<if test="reserve != null and reserve != '' ">
+		   AND reserve = #{reserve}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		   AND create_Date = #{create_date}
+		</if>
+		<if test="is_del != null ">
+		   AND is_del = #{is_del}
+		</if>
+		<if test="user_del != null ">
+		   AND user_del = #{user_del}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		   AND reserve1 = #{reserve1}
+		</if>
+		<if test="link_push != null and link_push != '' ">
+		   AND link_push = #{link_push}
+		</if>
+		<if test="link_push_two != null and link_push_two != '' ">
+		   AND link_push_two = #{link_push_two}
+		</if>
+	</delete>
+
+	<!-- 根据主键ID删除 Hu 2016-10-02 -->
+	<delete id="deleteById">
+		DELETE FROM USER 
+		 WHERE id = #{id} 
+	</delete>
+
+</mapper>

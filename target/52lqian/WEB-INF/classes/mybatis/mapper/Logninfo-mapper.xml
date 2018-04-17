@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winnerlook.kuailq.pojo.Logninfo">
+	
+	<!-- 列结果resultMap Hu 2016-10-02 -->
+	<resultMap id="resultMap" type="com.winnerlook.kuailq.pojo.Logninfo">
+        <result column="id" property="id"/>
+        <result column="userId" property="userid"/>
+        <result column="qwLogn" property="qwlogn"/>
+        <result column="birthDate" property="birthdate"/>
+        <result column="gender" property="gender"/>
+        <result column="register" property="register"/>
+        <result column="create_date" property="create_date"/>
+        <result column="house" property="house"/>
+        <result column="car" property="car"/>
+        <result column="profession" property="profession"/>
+        <result column="policy" property="policy"/>
+        <result column="wmd" property="wmd"/>
+        <result column="provice_id" property="provice_id"/>
+        <result column="city" property="city"/>
+        <result column="pay_off" property="pay_off"/>
+        <result column="m_income" property="m_income"/>
+        <result column="social" property="social"/>
+        <result column="w_time" property="w_time"/>
+        <result column="is_del" property="is_del"/>
+        <result column="business" property="business"/>
+	</resultMap>
+
+	<!-- 公共列 Hu 2016-10-02 -->
+	<sql id="columns">
+		id, userId, qwLogn, birthDate, gender, register, create_date, house, car, profession, policy, wmd, provice_id, city, pay_off, m_income, social, w_time, is_del,business
+	</sql>
+
+	<!-- 公共条件 Hu 2016-10-02 -->
+	<sql id="whereSQL">
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		<if test="userid != null and userid != '' ">
+		AND userId = #{userid}
+		</if>
+		<if test="qwlogn != null and qwlogn != '' ">
+		AND qwLogn = #{qwlogn}
+		</if>
+		<if test="birthdate != null and birthdate != '' ">
+		AND birthDate = #{birthdate}
+		</if>
+		<if test="gender != null and gender != '' ">
+		AND gender = #{gender}
+		</if>
+		<if test="register != null and register != '' ">
+		AND register = #{register}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		AND create_date = #{create_date}
+		</if>
+		<if test="house != null and house != '' ">
+		AND house = #{house}
+		</if>
+		<if test="car != null and car != '' ">
+		AND car = #{car}
+		</if>
+		<if test="profession != null and profession != '' ">
+		AND profession = #{profession}
+		</if>
+		<if test="policy != null and policy != '' ">
+		AND policy = #{policy}
+		</if>
+		<if test="wmd != null and wmd != '' ">
+		AND wmd = #{wmd}
+		</if>
+		<if test="provice_id != null and provice_id != '' ">
+		AND provice_id = #{provice_id}
+		</if>
+		<if test="city != null and city != '' ">
+		AND city = #{city}
+		</if>
+		<if test="pay_off != null and pay_off != '' ">
+		AND pay_off = #{pay_off}
+		</if>
+		<if test="m_income != null and m_income != '' ">
+		AND m_income = #{m_income}
+		</if>
+		<if test="social != null and social != '' ">
+		AND social = #{social}
+		</if>
+		<if test="w_time != null and w_time != '' ">
+		AND w_time = #{w_time}
+		</if>
+		<if test="is_del != null and is_del != '' ">
+		AND is_del = #{is_del}
+		</if>
+		<if test="business != null and business != '' ">
+		AND business = #{business}
+		</if>
+	</sql>
+
+	<!-- 公共分页条件SQL Hu 2016-10-02 -->
+	<sql id="wherePageSql">
+		<if test="paramMap.id != null and paramMap.id != '' ">
+		AND id = #{paramMap.id}
+		</if>
+		<if test="paramMap.userid != null and paramMap.userid != '' ">
+		AND userId = #{paramMap.userid}
+		</if>
+		<if test="paramMap.qwlogn != null and paramMap.qwlogn != '' ">
+		AND qwLogn = #{paramMap.qwlogn}
+		</if>
+		<if test="paramMap.birthdate != null and paramMap.birthdate != '' ">
+		AND birthDate = #{paramMap.birthdate}
+		</if>
+		<if test="paramMap.gender != null and paramMap.gender != '' ">
+		AND gender = #{paramMap.gender}
+		</if>
+		<if test="paramMap.register != null and paramMap.register != '' ">
+		AND register = #{paramMap.register}
+		</if>
+		<if test="paramMap.create_date != null and paramMap.create_date != '' ">
+		AND create_date = #{paramMap.create_date}
+		</if>
+		<if test="paramMap.house != null and paramMap.house != '' ">
+		AND house = #{paramMap.house}
+		</if>
+		<if test="paramMap.car != null and paramMap.car != '' ">
+		AND car = #{paramMap.car}
+		</if>
+		<if test="paramMap.profession != null and paramMap.profession != '' ">
+		AND profession = #{paramMap.profession}
+		</if>
+		<if test="paramMap.policy != null and paramMap.policy != '' ">
+		AND policy = #{paramMap.policy}
+		</if>
+		<if test="paramMap.wmd != null and paramMap.wmd != '' ">
+		AND wmd = #{paramMap.wmd}
+		</if>
+		<if test="paramMap.provice_id != null and paramMap.provice_id != '' ">
+		AND provice_id = #{paramMap.provice_id}
+		</if>
+		<if test="paramMap.city != null and paramMap.city != '' ">
+		AND city = #{paramMap.city}
+		</if>
+		<if test="paramMap.pay_off != null and paramMap.pay_off != '' ">
+		AND pay_off = #{paramMap.pay_off}
+		</if>
+		<if test="paramMap.m_income != null and paramMap.m_income != '' ">
+		AND m_income = #{paramMap.m_income}
+		</if>
+		<if test="paramMap.social != null and paramMap.social != '' ">
+		AND social = #{paramMap.social}
+		</if>
+		<if test="paramMap.w_time != null and paramMap.w_time != '' ">
+		AND w_time = #{paramMap.w_time}
+		</if>
+		<if test="paramMap.is_del != null and paramMap.is_del != '' ">
+		AND is_del = #{paramMap.is_del}
+		</if>
+		<if test="paramMap.business != null and paramMap.business != '' ">
+		AND business = #{paramMap.business}
+		</if>
+	</sql>
+
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectById" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM LOGNINFO 
+	     WHERE id = #{id}     
+	</select>
+	
+	<!-- 根据主键userid查询 Hu 2016-10-02 -->
+	<select id="selectByUserid" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM LOGNINFO 
+	     WHERE userId = #{userid}     
+	</select>
+
+	<!-- 查询列表 Hu 2016-10-02 -->
+	<select id="selectList" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM LOGNINFO
+		 WHERE 1 = 1	
+		 <include refid="whereSQL" />
+	</select>
+
+	<!-- 查询分页总数 Hu 2016-10-02 -->
+	<select id="selectForPageCount" resultType="java.lang.Long">
+		SELECT COUNT(id)
+		  FROM LOGNINFO
+		 WHERE 1 = 1	
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 查询分页列表 Hu 2016-10-02 -->
+	<select id="selectForPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM LOGNINFO
+		 WHERE 1 = 1
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 插入 Hu 2016-10-02 -->
+	<insert id="insert" parameterType="com.winnerlook.kuailq.pojo.Logninfo">
+        INSERT INTO LOGNINFO (
+        	id,
+        	userId,
+        	qwLogn,
+        	birthDate,
+        	gender,
+        	register,
+        	create_date,
+        	house,
+        	car,
+        	profession,
+        	policy,
+        	wmd,
+        	provice_id,
+        	city,
+        	pay_off,
+        	m_income,
+        	social,
+        	w_time,
+        	is_del,
+        	business
+        ) VALUES (
+        	#{id},
+        	#{userid},
+        	#{qwlogn},
+        	#{birthdate},
+        	#{gender},
+        	#{register},
+        	#{create_date},
+        	#{house},
+        	#{car},
+        	#{profession},
+        	#{policy},
+        	#{wmd},
+        	#{provice_id},
+        	#{city},
+        	#{pay_off},
+        	#{m_income},
+        	#{social},
+        	#{w_time},
+        	#{is_del},
+        	#{business}
+        )
+	</insert>
+
+	<!-- 批量插入 Hu 2016-10-02 -->
+	<insert id="batchInsert">
+		INSERT INTO LOGNINFO (
+        	id,
+        	userId,
+        	qwLogn,
+        	birthDate,
+        	gender,
+        	register,
+        	create_date,
+        	house,
+        	car,
+        	profession,
+        	policy,
+        	wmd,
+        	provice_id,
+        	city,
+        	pay_off,
+        	m_income,
+        	social,
+        	w_time,
+        	is_del,
+        	business
+        ) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+        	#{item.id},
+        	#{item.userid},
+        	#{item.qwlogn},
+        	#{item.birthdate},
+        	#{item.gender},
+        	#{item.register},
+        	#{item.create_date},
+        	#{item.house},
+        	#{item.car},
+        	#{item.profession},
+        	#{item.policy},
+        	#{item.wmd},
+        	#{item.provice_id},
+        	#{item.city},
+        	#{item.pay_off},
+        	#{item.m_income},
+        	#{item.social},
+        	#{item.w_time},
+        	#{item.is_del},
+        	#{item.business}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 更新 Hu 2016-10-02 -->
+	<update id="update" parameterType="com.winnerlook.kuailq.pojo.Logninfo">
+        UPDATE LOGNINFO 
+		SET
+	        userId = #{userid},
+	        qwLogn = #{qwlogn},
+	        birthDate = #{birthdate},
+	        gender = #{gender},
+	        register = #{register},
+	        create_date = #{create_date},
+	        house = #{house},
+	        car = #{car},
+	        profession = #{profession},
+	        policy = #{policy},
+	        wmd = #{wmd},
+	        provice_id = #{provice_id},
+	        city = #{city},
+	        pay_off = #{pay_off},
+	        m_income = #{m_income},
+	        social = #{social},
+	        w_time = #{w_time},
+	        is_del = #{is_del},
+	        business = #{business}
+        WHERE id = #{id} 	        
+	</update>
+
+	<!-- 删除 Hu 2016-10-02 -->
+	<delete id="delete">
+		DELETE FROM LOGNINFO
+		 WHERE 1 = 1
+		<if test="id != null and id != '' ">
+		   AND id = #{id}
+		</if>
+		<if test="userid != null and userid != '' ">
+		   AND userId = #{userid}
+		</if>
+		<if test="qwlogn != null and qwlogn != '' ">
+		   AND qwLogn = #{qwlogn}
+		</if>
+		<if test="birthdate != null and birthdate != '' ">
+		   AND birthDate = #{birthdate}
+		</if>
+		<if test="gender != null and gender != '' ">
+		   AND gender = #{gender}
+		</if>
+		<if test="register != null and register != '' ">
+		   AND register = #{register}
+		</if>
+		<if test="create_date != null and create_date != '' ">
+		   AND create_date = #{create_date}
+		</if>
+		<if test="house != null and house != '' ">
+		   AND house = #{house}
+		</if>
+		<if test="car != null and car != '' ">
+		   AND car = #{car}
+		</if>
+		<if test="profession != null and profession != '' ">
+		   AND profession = #{profession}
+		</if>
+		<if test="policy != null and policy != '' ">
+		   AND policy = #{policy}
+		</if>
+		<if test="wmd != null and wmd != '' ">
+		   AND wmd = #{wmd}
+		</if>
+		<if test="provice_id != null and provice_id != '' ">
+		   AND provice_id = #{provice_id}
+		</if>
+		<if test="city != null and city != '' ">
+		   AND city = #{city}
+		</if>
+		<if test="pay_off != null and pay_off != '' ">
+		   AND pay_off = #{pay_off}
+		</if>
+		<if test="m_income != null and m_income != '' ">
+		   AND m_income = #{m_income}
+		</if>
+		<if test="social != null and social != '' ">
+		   AND social = #{social}
+		</if>
+		<if test="w_time != null and w_time != '' ">
+		   AND w_time = #{w_time}
+		</if>
+		<if test="is_del != null and is_del != '' ">
+		   AND is_del = #{is_del}
+		</if>
+		<if test="business != null and business != '' ">
+		   AND business = #{business}
+		</if>
+	</delete>
+
+	<!-- 根据主键ID删除 Hu 2016-10-02 -->
+	<delete id="deleteById">
+		DELETE FROM LOGNINFO 
+		 WHERE id = #{id} 
+	</delete>
+
+</mapper>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winnerlook.kuailq.pojo.City">
+	
+	<!-- 列结果resultMap Hu 2016-10-02 -->
+	<resultMap id="resultMap" type="com.winnerlook.kuailq.pojo.City">
+        <result column="id" property="id"/>
+        <result column="city_index" property="city_index"/>
+        <result column="province_id" property="province_id"/>
+        <result column="name" property="name"/>
+	</resultMap>
+
+	<!-- 公共列 Hu 2016-10-02 -->
+	<sql id="columns">
+		id, city_index, province_id, name
+	</sql>
+
+	<!-- 公共条件 Hu 2016-10-02 -->
+	<sql id="whereSQL">
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		<if test="city_index != null and city_index != '' ">
+		AND city_index = #{city_index}
+		</if>
+		<if test="province_id != null and province_id != '' ">
+		AND province_id = #{province_id}
+		</if>
+		<if test="name != null and name != '' ">
+		AND name = #{name}
+		</if>
+	</sql>
+
+	<!-- 公共分页条件SQL Hu 2016-10-02 -->
+	<sql id="wherePageSql">
+		<if test="paramMap.id != null and paramMap.id != '' ">
+		AND id = #{paramMap.id}
+		</if>
+		<if test="paramMap.city_index != null and paramMap.city_index != '' ">
+		AND city_index = #{paramMap.city_index}
+		</if>
+		<if test="paramMap.province_id != null and paramMap.province_id != '' ">
+		AND province_id = #{paramMap.province_id}
+		</if>
+		<if test="paramMap.name != null and paramMap.name != '' ">
+		AND name = #{paramMap.name}
+		</if>
+	</sql>
+
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectById" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM CITY 
+	     WHERE id = #{id}     
+	</select>
+
+	<!-- 查询列表 Hu 2016-10-02 -->
+	<select id="selectList" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM CITY
+		 WHERE 1 = 1	
+		 <include refid="whereSQL" />
+	</select>
+
+	<!-- 查询分页总数 Hu 2016-10-02 -->
+	<select id="selectForPageCount" resultType="java.lang.Long">
+		SELECT COUNT(id)
+		  FROM CITY
+		 WHERE 1 = 1	
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 查询分页列表 Hu 2016-10-02 -->
+	<select id="selectForPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM CITY
+		 WHERE 1 = 1
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 插入 Hu 2016-10-02 -->
+	<insert id="insert" parameterType="com.winnerlook.kuailq.pojo.City">
+        INSERT INTO CITY (
+        	id,
+        	city_index,
+        	province_id,
+        	name
+        ) VALUES (
+        	#{id},
+        	#{city_index},
+        	#{province_id},
+        	#{name}
+        )
+	</insert>
+
+	<!-- 批量插入 Hu 2016-10-02 -->
+	<insert id="batchInsert">
+		INSERT INTO CITY (
+        	id,
+        	city_index,
+        	province_id,
+        	name
+        ) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+        	#{item.id},
+        	#{item.city_index},
+        	#{item.province_id},
+        	#{item.name}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 更新 Hu 2016-10-02 -->
+	<update id="update" parameterType="com.winnerlook.kuailq.pojo.City">
+        UPDATE CITY 
+		SET
+	        city_index = #{city_index},
+	        province_id = #{province_id},
+	        name = #{name}
+        WHERE id = #{id} 	        
+	</update>
+
+	<!-- 删除 Hu 2016-10-02 -->
+	<delete id="delete">
+		DELETE FROM CITY
+		 WHERE 1 = 1
+		<if test="id != null and id != '' ">
+		   AND id = #{id}
+		</if>
+		<if test="city_index != null and city_index != '' ">
+		   AND city_index = #{city_index}
+		</if>
+		<if test="province_id != null and province_id != '' ">
+		   AND province_id = #{province_id}
+		</if>
+		<if test="name != null and name != '' ">
+		   AND name = #{name}
+		</if>
+	</delete>
+
+	<!-- 根据主键ID删除 Hu 2016-10-02 -->
+	<delete id="deleteById">
+		DELETE FROM CITY 
+		 WHERE id = #{id} 
+	</delete>
+
+</mapper>

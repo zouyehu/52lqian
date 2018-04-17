@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+ 	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /> -->
+	
+ 	<!-- 用户信息 Hu 2017-03-16  -->
+	<!-- <bean id="userDao" class="com.winnerlook.kuailq.dao.impl.UserDaoImpl" parent="mybatisBaseDao"/>-->
+	
+	<bean id="userDao" class="com.winnerlook.kuailq.dao.impl.UserDaoImpl" parent="mybatisBaseDao" />
+	<bean id="provinceDao" class="com.winnerlook.kuailq.dao.impl.ProvinceDaoImpl" parent="mybatisBaseDao" />
+	<bean id="cityDao" class="com.winnerlook.kuailq.dao.impl.CityDaoImpl" parent="mybatisBaseDao"></bean>
+	<bean id="lognInfoDao" class="com.winnerlook.kuailq.dao.impl.LogninfoDaoImpl" parent="mybatisBaseDao"></bean>
+	<bean id="phones" class="com.winnerlook.kuailq.dao.impl.PhonesDaoImpl" parent="mybatisBaseDao"></bean>
+    
+<!--     <bean id="userService" class="com.winnerlook.kuailq.service.impl.UserServiceImpl"> -->
+<!-- 		<property name="userDao" ref="userDao"/> -->
+<!-- 	</bean>  -->
+
+<!--     <bean id="cityService" class="com.winnerlook.kuailq.service.impl.CityServiceImpl"> -->
+<!-- 		<property name="cityDao" ref="cityDao"/> -->
+<!-- 	</bean>  -->
+</beans>

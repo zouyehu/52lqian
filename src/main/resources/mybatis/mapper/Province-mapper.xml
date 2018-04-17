@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winnerlook.kuailq.pojo.Province">
+	
+	<!-- 列结果resultMap Hu 2016-10-02 -->
+	<resultMap id="resultMap" type="com.winnerlook.kuailq.pojo.Province">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+	</resultMap>
+
+	<!-- 公共列 Hu 2016-10-02 -->
+	<sql id="columns">
+		id, name
+	</sql>
+
+	<!-- 公共条件 Hu 2016-10-02 -->
+	<sql id="whereSQL">
+		<if test="id != null and id != '' ">
+		AND id = #{id}
+		</if>
+		<if test="name != null and name != '' ">
+		AND name = #{name}
+		</if>
+	</sql>
+
+	<!-- 公共分页条件SQL Hu 2016-10-02 -->
+	<sql id="wherePageSql">
+		<if test="paramMap.id != null and paramMap.id != '' ">
+		AND id = #{paramMap.id}
+		</if>
+		<if test="paramMap.name != null and paramMap.name != '' ">
+		AND name = #{paramMap.name}
+		</if>
+	</sql>
+
+	<!-- 根据主键ID查询 Hu 2016-10-02 -->
+	<select id="selectById" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PROVINCE 
+	     WHERE id = #{id}     
+	</select>
+
+	<!-- 查询列表 Hu 2016-10-02 -->
+	<select id="selectList" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PROVINCE
+		 WHERE 1 = 1	
+		 <include refid="whereSQL" />
+	</select>
+
+	<!-- 查询分页总数 Hu 2016-10-02 -->
+	<select id="selectForPageCount" resultType="java.lang.Long">
+		SELECT COUNT(id)
+		  FROM PROVINCE
+		 WHERE 1 = 1	
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 查询分页列表 Hu 2016-10-02 -->
+	<select id="selectForPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		  FROM PROVINCE
+		 WHERE 1 = 1
+		 <include refid="wherePageSql" />
+	</select>
+
+	<!-- 插入 Hu 2016-10-02 -->
+	<insert id="insert" parameterType="com.winnerlook.kuailq.pojo.Province">
+        INSERT INTO PROVINCE (
+        	id,
+        	name
+        ) VALUES (
+        	#{id},
+        	#{name}
+        )
+	</insert>
+
+	<!-- 批量插入 Hu 2016-10-02 -->
+	<insert id="batchInsert">
+		INSERT INTO PROVINCE (
+        	id,
+        	name
+        ) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+        	#{item.id},
+        	#{item.name}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 更新 Hu 2016-10-02 -->
+	<update id="update" parameterType="com.winnerlook.kuailq.pojo.Province">
+        UPDATE PROVINCE 
+		SET
+	        name = #{name}
+        WHERE id = #{id} 	        
+	</update>
+
+	<!-- 删除 Hu 2016-10-02 -->
+	<delete id="delete">
+		DELETE FROM PROVINCE
+		 WHERE 1 = 1
+		<if test="id != null and id != '' ">
+		   AND id = #{id}
+		</if>
+		<if test="name != null and name != '' ">
+		   AND name = #{name}
+		</if>
+	</delete>
+
+	<!-- 根据主键ID删除 Hu 2016-10-02 -->
+	<delete id="deleteById">
+		DELETE FROM PROVINCE 
+		 WHERE id = #{id} 
+	</delete>
+
+</mapper>
